@@ -12,6 +12,7 @@ import javax.faces.validator.ValidatorException;
 import br.com.caelum.livraria.dao.DAO;
 import br.com.caelum.livraria.modelo.Autor;
 import br.com.caelum.livraria.modelo.Livro;
+import br.com.caelum.livraria.util.RedirectView;
 
 @ManagedBean
 @ViewScoped
@@ -59,6 +60,11 @@ public class LivroBean {
 	
 	public List<Livro> getLivros() {
 		return new DAO<Livro>(Livro.class).listaTodos();
+	}
+	
+	public RedirectView formAutor() {
+		
+		return new RedirectView("autor");
 	}
 	
 	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
