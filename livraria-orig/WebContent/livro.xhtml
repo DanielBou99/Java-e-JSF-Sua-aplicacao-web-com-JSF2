@@ -65,15 +65,19 @@
 						<h:column>
 							<h:outputText value="#{autor.nome}" />
 						</h:column>
+						<h:column>
+						  <h:commandLink value="X" action="#{livroBean.removerAutorDoLivro(autor)}" />
+						</h:column>
 					</h:dataTable>
 				</fieldset>
 				
 				<h:commandButton value="Gravar" action="#{livroBean.gravar}">
-					<f:ajax execute="@form" render="@form :tabelaLivros" />
+					<f:ajax execute="@form" render="@form :formTabelaLivros:tabelaLivros" />
 				</h:commandButton>
 				
 			</h:form>
 			
+			<h:form id="formTabelaLivros">
 			<h:dataTable value="#{livroBean.livros}" var="livro" id="tabelaLivros">
 				<h:column>
 					<f:facet name="header">Titulo</f:facet>
@@ -95,8 +99,18 @@
 				      <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 				  </h:outputText>
 				</h:column>
+				<h:column>
+				  <f:facet name="header">Alterar</f:facet>
+				  <h:commandLink value="alterar" action="#{livroBean.carregar(livro)}" />
+				</h:column>
+				<h:column>
+				  <f:facet name="header">Remover</f:facet>
+				  <h:commandLink value="Remover" action="#{livroBean.remover(livro)}" />
+				</h:column>
 			</h:dataTable>
-	
+		
+		</h:form>
+		
 		</ui:define>
 		
 		<ui:define name="texto">

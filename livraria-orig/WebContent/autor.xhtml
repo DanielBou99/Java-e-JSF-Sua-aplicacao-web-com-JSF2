@@ -15,6 +15,7 @@
 		<ui:define name="conteudo">
 		
 			<h:form id="autor">
+				<h:messages id="messages" />
 				<fieldset>
 					<legend>Dados do Autor</legend>
 					<h:panelGrid columns="3">
@@ -27,6 +28,24 @@
 					</h:panelGrid>
 				</fieldset>
 			</h:form>
+			
+			<h:form>
+				<h:dataTable value="#{autorBean.autores}" var="autor" id="tabelaAutores">
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText value="#{autor.nome}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Alterar</f:facet>
+						<h:commandLink value="Alterar" action="#{autorBean.carregar(autor)}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Remover</f:facet>
+						<h:commandLink value="Remover" action="#{autorBean.remover(autor)}" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+	
 	
 		</ui:define>
 		

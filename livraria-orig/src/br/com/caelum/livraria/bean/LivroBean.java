@@ -54,17 +54,35 @@ public class LivroBean {
 			FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve ter pelo menos um Autor."));
 			return;
 		}
+		
+		if (this.livro.getId() == null) {
+			new DAO<Livro>(Livro.class).adiciona(this.livro);
+		} else {
+			new DAO<Livro>(Livro.class).atualiza(this.livro);
+		}
 
-		new DAO<Livro>(Livro.class).adiciona(this.livro);
+		this.livro = new Livro();
+	}
+	
+	public void removerAutorDoLivro(Autor autor) {
+		this.livro.removeAutor(autor);
 	}
 	
 	public List<Livro> getLivros() {
 		return new DAO<Livro>(Livro.class).listaTodos();
 	}
 	
+	public void remover(Livro livro) {
+		System.out.println("Removendo livro " + livro.getTitulo());
+		new DAO<Livro>(Livro.class).remove(livro);
+	}
+	
 	public RedirectView formAutor() {
-		
 		return new RedirectView("autor");
+	}
+	
+	public void carregar(Livro livro) {
+		this.livro = livro;
 	}
 	
 	public void comecaComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
