@@ -17,7 +17,20 @@ import br.com.caelum.livraria.util.RedirectView;
 public class AutorBean {
 
 	private Autor autor = new Autor();
-
+	private Integer autorId;
+	
+	public Integer getAutorId() {
+		return autorId;
+	}
+	
+	public void setAutorId(Integer autorId) {
+		this.autorId = autorId;
+	}
+	
+	public void carregarAutorPelaId() {
+		this.autor = new DAO<Autor>(Autor.class).buscaPorId(autorId);
+	}
+	
 	public Autor getAutor() {
 		return autor;
 	}
