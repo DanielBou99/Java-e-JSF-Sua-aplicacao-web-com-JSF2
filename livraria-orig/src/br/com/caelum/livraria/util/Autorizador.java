@@ -19,12 +19,14 @@ public class Autorizador implements PhaseListener{
 		System.out.println(nomePagina);
 		
 		if("/login.xhtml".equals(nomePagina)) {
+			System.out.println("Usuário não existe.");
 			return;
 		}
 		
 		Usuario usuarioLogado = (Usuario) context.getExternalContext().getSessionMap().get("usuarioLogado");
 		
 		if (usuarioLogado != null) {
+			System.out.println("Logando: " + usuarioLogado.getEmail());
 			return;
 		}
 		
